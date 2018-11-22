@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Deenay</string>
+    <string name="facebook_app_id">1992529300790847</string>
+    <string name="fb_login_protocol_scheme">fb1992529300790847</string>
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+    <string name="slide_1_title">AUTHENCITY</string>
+    <string name="slide_1_desc">Ensure the satisfaction of our product by knowing its authenticity. Scan and Enjoy.</string>
+    <string name="slide_2_title">CATALOG</string>
+    <string name="slide_2_desc">Find the complete collection of our brand by simply using your finger tip. Easy and Quick.</string>
+    <string name="slide_3_title"><![CDATA[NEWS & PROMO]]></string>
+    <string name="slide_3_desc">Keep up to date with our latest news and promotions Never miss any sale again.</string>
+    <string name="slide_4_title">TUTORIAL</string>
+    <string name="slide_4_desc">Watch bunch of videos from our community how to dress modesty. We\'ll guide you there.</string>
+    <string name="slide_5_title">STORE LOCATORE</string>
+    <string name="slide_5_desc">Find our official stores near you with our app. Never get lost again. Happy shopping !</string>
+</resources>

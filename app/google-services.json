@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "441678409837",
+    "firebase_url": "https://deenaystyles.firebaseio.com",
+    "project_id": "deenaystyles",
+    "storage_bucket": "deenaystyles.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:441678409837:android:58e2e587a3a14118",
+        "android_client_info": {
+          "package_name": "com.denaay"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "441678409837-ug7642p3223prjlu8pi2nbcb55h7n2fd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.denaay",
+            "certificate_hash": "d7f855716d51d929d059b69db6087aad3f7ac986"
+          }
+        },
+        {
+          "client_id": "441678409837-gsslh8e1hbpk8ujr3aqmqaruf6kbh7h3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUS0osMA4ddmfsQ7g9MirWv5Rz1Zs_BTg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "441678409837-gsslh8e1hbpk8ujr3aqmqaruf6kbh7h3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

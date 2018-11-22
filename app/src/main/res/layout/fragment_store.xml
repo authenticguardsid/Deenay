@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="OUR STORE"
+            android:gravity="center"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:padding="16dp"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/capture"
+            android:scaleType="fitXY"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lineSpacingMultiplier="1.5"
+            android:padding="16dp"
+            android:text="Address : Jl. Kembar Timur No. 38, Cigereleng, Regol, Kota Bandung, Jawa Barat 40253"
+            android:textColor="@color/colorGREY"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lineSpacingMultiplier="1.5"
+            android:paddingLeft="16dp"
+            android:text="Phone : 0815 6221 999"
+            android:textColor="@color/colorGREY"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button_get_direction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="48dp"
+        android:layout_marginRight="48dp"
+        android:layout_marginBottom="48dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/button_login_email"
+        android:text="GET DIRECTION"
+        android:textColor="@color/colorGREY" />
+
+</RelativeLayout>
