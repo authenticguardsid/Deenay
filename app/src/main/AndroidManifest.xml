@@ -58,7 +58,9 @@
         <activity android:name=".component.raw.videoDuaActivity" />
         <activity android:name=".component.raw.videoTigaActivity" />
         <activity android:name=".pages.webViewActivity" />
-        <activity android:name=".pages.RegisterActivity"></activity>
+        <activity android:name=".pages.RegisterActivity" />
+        <activity android:name=".pages.VerifiedActivity" />
+        <activity android:name=".pages.FakeActivity"></activity>
     </application>
 
 </manifest>
