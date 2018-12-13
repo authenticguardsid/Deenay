@@ -8,6 +8,7 @@
     <color name="colorGREY">#767676</color>
     <color name="colorRed">#BF4242</color>
     <color name="colorGreen">#209467</color>
+    <color name="colorSecondary">#232f34</color>
 
     <!-- dots inactive colors -->
     <color name="dot_inactive_screen1">#cccccc</color>

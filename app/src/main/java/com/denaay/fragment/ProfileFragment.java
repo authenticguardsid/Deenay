@@ -14,11 +14,13 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.denaay.R;
+import com.denaay.pages.WebViewActivity;
+import com.denaay.pages.EditProfileActivity;
 import com.denaay.pages.MainActivity;
-import com.denaay.pages.webViewActivity;
 import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -26,15 +28,24 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class ProfileFragment extends Fragment {
 
+    private static final String TAG = "asdf";
     private FirebaseAuth mAuth;
+    private FirebaseFirestore firebaseFirestore;
     private GoogleSignInClient mGoogleSignInClient;
     private GoogleApiClient mGoogleApiClient;
     private static Button logoutBtn;
+
+    private String current_user = null;
+
+    private TextView mEditText, nama, email, phone;
 
     private static RelativeLayout pmenu1,pmenu3,pmenu5;
 
@@ -45,13 +56,11 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        if (Build.VERSION.SDK_INT >= 21) {
-            getActivity().getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-        }
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         changeStatusBarColor();
 
         mAuth = FirebaseAuth.getInstance();
+        current_user =mAuth.getCurrentUser().getUid();
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
@@ -61,6 +70,42 @@ public class ProfileFragment extends Fragment {
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
         mGoogleApiClient.connect();
+
+        mEditText = view.findViewById(R.id.textEditProfile);
+        mEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), EditProfileActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        firebaseFirestore= FirebaseFirestore.getInstance();
+
+        nama = view.findViewById(R.id.textFname);
+        email = view.findViewById(R.id.textEmail);
+        phone = view.findViewById(R.id.textPhone);
+
+        firebaseFirestore.collection("Users").document(current_user).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    String nama_user = task.getResult().getString("Name");
+                    String email_user = task.getResult().getString("Email");
+                    String phone_user = task.getResult().getString("Phone");
+
+                    nama.setText(nama_user);
+                    email.setText(email_user);
+                    phone.setText(phone_user);
+                }
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
 
         pmenu1 = view.findViewById(R.id.pmenu1);
         pmenu1.setOnClickListener(new View.OnClickListener() {
@@ -75,8 +120,8 @@ public class ProfileFragment extends Fragment {
         pmenu3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), webViewActivity.class);
-                intent.putExtra("mkind", "https://www.authenticguards.com/term/");
+                Intent intent = new Intent(getActivity(), WebViewActivity.class);
+                intent.putExtra("urlnews", "https://www.authenticguards.com/term/");
                 startActivity(intent);
             }
         });

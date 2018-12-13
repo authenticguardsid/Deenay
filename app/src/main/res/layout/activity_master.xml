@@ -16,16 +16,13 @@
             android:layout_height="wrap_content">
 
             <android.support.v7.widget.Toolbar
-                android:id="@+id/ToolbarHome"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:background="@drawable/toolbar">
 
                 <ImageView
-                    android:id="@+id/img_logo"
                     android:layout_width="72dp"
-                    android:layout_height="wrap_content"
-                    android:adjustViewBounds="false"
+                    android:layout_height="match_parent"
                     android:src="@drawable/deenay"/>
 
             </android.support.v7.widget.Toolbar>
@@ -34,7 +31,6 @@
 
         <!-- Body -->
         <RelativeLayout
-            android:id="@+id/rellayout1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/rellayout2"
@@ -51,7 +47,7 @@
         <RelativeLayout
             android:id="@+id/rellayout2"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="56dp"
             android:layout_alignParentBottom="true">
 
             <include layout="@layout/layout_bottom_navbar"/>

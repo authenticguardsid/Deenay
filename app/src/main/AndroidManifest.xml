@@ -2,16 +2,23 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.denaay">
 
+    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -25,7 +32,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDSQZbh4y1m6eXxGS7BtDDpkaNJEGuX5Bc" />
+            android:value="AIzaSyDUS0osMA4ddmfsQ7g9MirWv5Rz1Zs_BTg" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -52,15 +59,14 @@
         <activity android:name=".pages.MainActivity" />
         <activity android:name=".pages.LoginActivity" />
         <activity android:name=".pages.MasterActivity" />
-        <activity android:name=".PhoneActivity" />
+        <activity android:name=".pages.PhoneActivity" />
         <activity android:name=".pages.QRcodeActivity" />
-        <activity android:name=".component.raw.videoSatuActivity" />
-        <activity android:name=".component.raw.videoDuaActivity" />
-        <activity android:name=".component.raw.videoTigaActivity" />
-        <activity android:name=".pages.webViewActivity" />
         <activity android:name=".pages.RegisterActivity" />
         <activity android:name=".pages.VerifiedActivity" />
-        <activity android:name=".pages.FakeActivity"></activity>
+        <activity android:name=".pages.FakeActivity" />
+        <activity android:name=".pages.EditProfileActivity" />
+        <activity android:name=".pages.WebViewActivity"></activity>
+
     </application>
 
 </manifest>

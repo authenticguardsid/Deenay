@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "441678409837-cgcr1ijmi0g87juutq19e3cei58m0e9s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.denaay",
+            "certificate_hash": "9b5e92c3c3cadbe0aafc641651260cecac3fa381"
+          }
+        },
+        {
           "client_id": "441678409837-gsslh8e1hbpk8ujr3aqmqaruf6kbh7h3.apps.googleusercontent.com",
           "client_type": 3
         }

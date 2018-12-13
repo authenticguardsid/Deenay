@@ -15,18 +15,13 @@ import com.denaay.R;
 
 public class NotifFragment extends Fragment {
 
-
     public NotifFragment() {
 
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        if (Build.VERSION.SDK_INT >= 21) {
-            getActivity().getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-        }
         View view = inflater.inflate(R.layout.fragment_notif, container, false);
         changeStatusBarColor();
         return view;

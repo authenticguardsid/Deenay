@@ -1,8 +1,13 @@
 package com.denaay.pages;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,14 +20,9 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.denaay.R;
-import com.denaay.utils.HttpHandler;
-import com.google.android.gms.vision.barcode.Barcode;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
+import com.google.zxing.Result;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,25 +31,60 @@ import org.json.JSONObject;
 import java.util.List;
 
 import info.androidhive.barcode.BarcodeReader;
+import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
-public class QRcodeActivity extends AppCompatActivity implements BarcodeReader.BarcodeReaderListener {
+public class QRcodeActivity extends AppCompatActivity implements ZXingScannerView.ResultHandler {
 
-    BarcodeReader barcodeReader;
     String GENIUNE_CODE = "success";
     String FAKE_CODE = "error";
     String rvalid;
 
+    int REQUEST_CODE_CAMERA = 999;
+
+    private ZXingScannerView mScannerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (Build.VERSION.SDK_INT >= 21) {
-            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-        }
-        setContentView(R.layout.activity_qrcode);
+
+        mScannerView = new ZXingScannerView(this);
+        setContentView(mScannerView);
         changeStatusBarColor();
 
-        barcodeReader = (BarcodeReader) getSupportFragmentManager().findFragmentById(R.id.barcode_scanner);
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED){
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, REQUEST_CODE_CAMERA);
+        }
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mScannerView.setResultHandler(this);
+        mScannerView.startCamera();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mScannerView.stopCamera();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+        if(requestCode == REQUEST_CODE_CAMERA){
+            if(grantResults.length < 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED){
+                Toast.makeText(getApplicationContext(), "You don't have permissions", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    @Override
+    public void handleResult(Result result) {
+        validation_code(result.getText());
     }
 
     private void changeStatusBarColor() {
@@ -58,32 +93,6 @@ public class QRcodeActivity extends AppCompatActivity implements BarcodeReader.B
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(Color.TRANSPARENT);
         }
-    }
-
-    @Override
-    public void onScanned(Barcode barcode) {
-        barcodeReader.playBeep();
-        validation_code(barcode.displayValue);
-    }
-
-    @Override
-    public void onScannedMultiple(List<Barcode> barcodes) {
-
-    }
-
-    @Override
-    public void onBitmapScanned(SparseArray<Barcode> sparseArray) {
-
-    }
-
-    @Override
-    public void onScanError(String errorMessage) {
-        Toast.makeText(getApplicationContext(), "Error occurred while scanning " + errorMessage, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onCameraPermissionDenied() {
-
     }
 
     public void validation_code(final String scancode){
@@ -105,8 +114,7 @@ public class QRcodeActivity extends AppCompatActivity implements BarcodeReader.B
                         Intent intent_geniune = new Intent(QRcodeActivity.this, VerifiedActivity.class);
                         intent_geniune.putExtra("key", scancode);
                         startActivity(intent_geniune);
-                    }
-                    if (rvalid.equals(FAKE_CODE)){
+                    } else {
                         Intent intent_fake = new Intent(QRcodeActivity.this, FakeActivity.class);
                         startActivity(intent_fake);
                     }
@@ -119,38 +127,6 @@ public class QRcodeActivity extends AppCompatActivity implements BarcodeReader.B
             }
         });
         Volley.newRequestQueue(this).add(jsonObjectRequest);
-
-//        JsonArrayRequest arrayRequest = new JsonArrayRequest("admin.authenticguards.net/api/check_/"+scancode+"?token=a&appid=001", new com.android.volley.Response.Listener<JSONArray>() {
-//            @Override
-//            public void onResponse(JSONArray response) {
-//                if (response.length() > 0) {
-//                    for (int i = 0; i < response.length(); i++) {
-//                        try {
-//                            JSONObject data = response.getJSONObject(i);
-//                            rvalid = data.getString("status");
-//                            Toast.makeText(QRcodeActivity.this, rvalid, Toast.LENGTH_SHORT).show();
-//                        } catch (JSONException e) {
-//
-//                        }
-//                    }
-//                    if (rvalid.equals(GENIUNE_CODE)){
-//                        Intent intent_geniune = new Intent(QRcodeActivity.this, VerifiedActivity.class);
-//                        intent_geniune.putExtra("key", scancode);
-//                        startActivity(intent_geniune);
-//                    }
-//                    if (rvalid.equals(FAKE_CODE)){
-//                        Intent intent_fake = new Intent(QRcodeActivity.this, FakeActivity.class);
-//                        startActivity(intent_fake);
-//                    }
-//                }
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//
-//            }
-//        });
-//        Volley.newRequestQueue(this).add(arrayRequest);
 
     }
 

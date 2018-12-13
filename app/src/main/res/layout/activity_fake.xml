@@ -8,7 +8,6 @@
     android:background="#ffffff">
 
     <LinearLayout
-        android:id="@+id/headerCertified"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -41,7 +40,6 @@
             android:typeface="sans" />
 
         <TextView
-            android:id="@+id/textSubCong"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/textCongratulation"
@@ -58,7 +56,6 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:layout_centerHorizontal="true"
@@ -82,7 +79,6 @@
             android:typeface="sans" />
 
         <TextView
-            android:id="@+id/dtext8"
             android:layout_below="@+id/dtext7"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -95,9 +91,9 @@
             android:typeface="sans" />
 
         <Button
-            android:id="@+id/buttonReport"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="16dp"
             android:text="LAPOR"
             android:textColor="@color/colorWhite"
             android:background="@color/colorRed"
